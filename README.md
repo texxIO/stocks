@@ -14,3 +14,8 @@ To start the scheduler or the jobs workers use one of the command:
 - `make artisan-schedule-work`
 - `make artisan-queue-work`
 
+
+
+## Notes
+The application is using the Alpha Vantage API. 
+The free version of the API has a limit of 5 requests per minute and `25 requests per day`.
