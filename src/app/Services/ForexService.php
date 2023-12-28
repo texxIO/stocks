@@ -19,13 +19,10 @@ class ForexService
     public function __construct(ForexRepository $forexRateRepository)
     {
         $this->forexRateRepository = $forexRateRepository;
-
     }
 
     public function saveForexRate(ForexCurrency $forexCurrency)
     {
-
-
         $api_key = config('services.alpha_vantage.api_key');
 
         $cached_quote = Cache::get(self::CACHE_PREFIX . $forexCurrency);
