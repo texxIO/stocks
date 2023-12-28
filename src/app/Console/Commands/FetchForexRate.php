@@ -43,7 +43,6 @@ class FetchForexRate extends Command
         }
 
 
-
         if (empty($status)) {
             $this->info("Successfully fetched forex quotes.");
         } else {

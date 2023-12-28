@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ForexCurrency;
-
 use App\Repositories\ForexRepository;
 
 
@@ -17,13 +15,15 @@ class ForexController extends Controller
         $this->forexRepository = $forexRepository;
     }
 
-    public function index(){
+    public function index()
+    {
 
         $currencies = $this->forexRepository->getCurrency();
         return response()->json($currencies);
     }
 
-    public function show(string $currency_pair){
+    public function show(string $currency_pair)
+    {
 
         $response = $this->forexRepository->findBySymbol($currency_pair);
         return response()->json($response);

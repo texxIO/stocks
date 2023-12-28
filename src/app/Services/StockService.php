@@ -4,8 +4,8 @@ namespace App\Services;
 
 use App\Models\Stock;
 use App\Models\StockQuote;
+use Exception;
 use GuzzleHttp\Client;
-use Illuminate\Support\Facades\Http;
 
 class StockService
 {
@@ -58,7 +58,7 @@ class StockService
 //                return;
 //            }
 //            return json_decode($response->getBody(), true);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             // Handle exception
             return null;
         }

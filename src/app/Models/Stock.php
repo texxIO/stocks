@@ -9,11 +9,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Stock extends Model
 {
     use HasFactory;
-    protected $table ='stocks';
+
+    protected $table = 'stocks';
 
     protected $fillable = [
         'symbol'
-        ];
+    ];
 
     public function stockQuotes(): HasMany
     {

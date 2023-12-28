@@ -6,7 +6,7 @@ use App\Models\ForexCurrency;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<ForexCurrency>
+ * @extends Factory<ForexCurrency>
  */
 class ForexCurrencyFactory extends Factory
 {

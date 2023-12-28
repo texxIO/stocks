@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ForexCurrency extends Model
 {
     use HasFactory;
+
     protected $table = 'forex_currencies';
     protected $fillable = [
         'from_currency_code',

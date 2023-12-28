@@ -7,7 +7,6 @@ use App\Models\ForexCurrency;
 use App\Models\ForexRate;
 
 
-
 class ForexRepository implements ForexRepositoryInterface
 {
     public function save(array $data, ForexCurrency $forexCurrency)

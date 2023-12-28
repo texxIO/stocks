@@ -9,7 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class StockQuote extends Model
 {
     use HasFactory;
-    protected $table ='stock_quotes';
+
+    protected $table = 'stock_quotes';
 
     protected $fillable = [
         'symbol_id',

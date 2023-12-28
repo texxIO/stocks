@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\ForexCurrency;
-
 use Illuminate\Database\Seeder;
 
 
