@@ -22,11 +22,11 @@ artisan-migrate:
 .PHONY: artisan-migrate
 
 artisan-session-table:
-	$(DOCKER_COMPOSE) exec -u $(shell id -u):$(shell id -g) php php artisan session:table
+	-$(DOCKER_COMPOSE) exec -u $(shell id -u):$(shell id -g) php php artisan session:table
 .PHONY: artisan-session-table
 
 artisan-queues-table:
-	$(DOCKER_COMPOSE) exec -u $(shell id -u):$(shell id -g) php php artisan queue:table
+	-$(DOCKER_COMPOSE) exec -u $(shell id -u):$(shell id -g) php php artisan queue:table
 .PHONY: artisan-queues-table
 
 artisan-schedule-work:
@@ -41,6 +41,14 @@ artisan-queue-work:
 	$(DOCKER_COMPOSE) exec -u $(shell id -u):$(shell id -g) php php artisan queue:work
 .PHONY: artisan-queue-work
 
+npm-install:
+	$(DOCKER_COMPOSE) exec -u $(shell id -u):$(shell id -g) php npm install
+.PHONY: npm-install
+
+npm-run-dev:
+	$(DOCKER_COMPOSE) exec -u $(shell id -u):$(shell id -g) php npm run dev
+.PHONY: npm-run-dev
+
 clean-volumes:
 	docker volume ls -qf "name=.*stocks.*" | xargs -r docker volume rm
 .PHONY: clean-volumes
@@ -53,5 +61,5 @@ clean-images:
 	docker-compose down --rmi all
 .PHONY: clean-images
 
-setup: composer-install artisan-migrate artisan-session-table artisan-queues-table artisan-seed-currencies
+setup: composer-install artisan-migrate artisan-session-table artisan-queues-table artisan-seed-currencies npm-install
 .PHONY: .setup

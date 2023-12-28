@@ -14,6 +14,8 @@ RUN apt update \
     libbz2-dev \
     libpng-dev \
     cron \
+    nodejs \
+    npm \
     && rm -rf /var/lib/apt/lists/*
 
 RUN docker-php-ext-configure zip && \

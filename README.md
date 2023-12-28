@@ -5,6 +5,7 @@ Set the `ALPHA_VANTAGE_API_KEY` variable in the `.env` file
 #### Run the commands in the terminal to start the project locally
 1. `docker-compose up` 
 2. `make setup`
+3. `make artisan-schedule-work`
 
 
 To start the scheduler or the jobs workers use one of the command:
