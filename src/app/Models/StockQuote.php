@@ -15,7 +15,7 @@ class StockQuote extends Model
         'symbol_id',
         'quote'];
 
-    public function user(): BelongsTo
+    public function stock(): BelongsTo
     {
         return $this->belongsTo(Stock::class);
     }

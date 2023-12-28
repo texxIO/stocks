@@ -17,4 +17,9 @@ class ForexCurrency extends Model
         'currency_pair',
 
     ];
+
+    public function forexRates()
+    {
+        return $this->hasMany(ForexRate::class, 'currency_id');
+    }
 }

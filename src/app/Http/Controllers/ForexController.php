@@ -24,12 +24,9 @@ class ForexController extends Controller
     }
 
     public function show(string $currency_pair){
-        $rates = ForexCurrency::where('currency_pair',$currency_pair)->forexRates->orderBy('created_at', 'desc')->get();
 
-        foreach ($rates->toArray() as $key => $value) {
-            dump($value);
-        }
-        return response()->json($rates);
+        $response = $this->forexRepository->findBySymbol($currency_pair);
+        return response()->json($response);
     }
 
 }

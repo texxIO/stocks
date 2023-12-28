@@ -15,6 +15,10 @@ To start the scheduler or the jobs workers use one of the command:
 - `make artisan-queue-work`
 
 
+## API Endpoints
+
+`GET /api/forex` - returns all currencies
+`GET /api/forex/{currency}` - returns the currency with the given name
 
 ## Notes
 The application is using the Alpha Vantage API. 
