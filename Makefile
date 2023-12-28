@@ -32,5 +32,13 @@ artisan-queue-work:
 .PHONY: artisan-queue-work
 
 clean-volumes:
-	docker-volume rm stocks_mysql_data stocks_redis_data
+	docker volume ls -qf "name=.*stocks.*" | xargs -r docker volume rm
 .PHONY: clean-volumes
+
+clean-containers:
+	docker ps -a --format '{{.Names}}' | grep 'stocks' | xargs -r docker rm -f
+.PHONY: clean-containers
+
+clean-images:
+	docker-compose down --rmi all
+.PHONY: clean-images
