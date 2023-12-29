@@ -2,7 +2,6 @@
 
 namespace App\Jobs;
 
-
 use App\Models\ForexCurrency;
 use App\Services\ForexService;
 use Illuminate\Bus\Queueable;
@@ -11,12 +10,12 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-
 class FetchForexRatesJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     private ForexService $forexService;
+
     private ForexCurrency $forexCurrency;
 
     /**

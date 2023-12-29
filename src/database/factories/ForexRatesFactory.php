@@ -27,7 +27,7 @@ class ForexRatesFactory extends Factory
             'time_zone' => $this->faker->timezone(),
             'bid_price' => $this->faker->randomFloat(2, 0, 100),
             'ask_price' => $this->faker->randomFloat(2, 0, 100),
-            'currency_pair' => $this->faker->currencyCode() . '/' . $this->faker->currencyCode(),
+            'currency_pair' => $this->faker->currencyCode().'/'.$this->faker->currencyCode(),
         ];
     }
 }

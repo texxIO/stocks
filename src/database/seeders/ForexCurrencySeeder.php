@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\ForexCurrency;
 use Illuminate\Database\Seeder;
 
-
 class ForexCurrencySeeder extends Seeder
 {
     /**
@@ -22,7 +21,6 @@ class ForexCurrencySeeder extends Seeder
             ['from_currency_code' => 'USD', 'from_currency_name' => 'US Dollar', 'to_currency_code' => 'AUD', 'to_currency_name' => 'Australian Dollar'],
             ['from_currency_code' => 'USD', 'from_currency_name' => 'US Dollar', 'to_currency_code' => 'NZD', 'to_currency_name' => 'New Zealand Dollar'],
             ['from_currency_code' => 'EUR', 'from_currency_name' => 'EUR', 'to_currency_code' => 'USD', 'to_currency_name' => 'USD'],
-
 
         ];
 

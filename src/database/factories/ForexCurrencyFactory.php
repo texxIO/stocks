@@ -19,12 +19,13 @@ class ForexCurrencyFactory extends Factory
     {
         $currencyFrom = $this->faker->currencyCode();
         $currencyTo = $this->faker->currencyCode();
+
         return [
             'from_currency_code' => $currencyFrom,
             'from_currency_name' => $this->faker->currencyName(),
             'to_currency_code' => $currencyTo,
             'to_currency_name' => $this->faker->currencyName(),
-            'currency_pair' => $currencyFrom . '/' . $currencyTo,
+            'currency_pair' => $currencyFrom.'/'.$currencyTo,
         ];
     }
 }

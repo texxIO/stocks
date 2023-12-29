@@ -42,6 +42,6 @@ class FetchForexRateCommand extends Command
 
             FetchForexRatesJob::dispatch($currency_pair, $this->forexService);
         }
-        $this->info("Successfully dispatched the fetch currency rates jobs.");
+        $this->info('Successfully dispatched the fetch currency rates jobs.');
     }
 }

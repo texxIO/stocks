@@ -10,6 +10,7 @@ class ForexCurrency extends Model
     use HasFactory;
 
     protected $table = 'forex_currencies';
+
     protected $fillable = [
         'from_currency_code',
         'from_currency_name',

@@ -13,7 +13,7 @@ class Stock extends Model
     protected $table = 'stocks';
 
     protected $fillable = [
-        'symbol'
+        'symbol',
     ];
 
     public function stockQuotes(): HasMany

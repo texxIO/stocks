@@ -23,4 +23,3 @@ Route::group(['api'], function () {
     Route::get('/forex', [ForexController::class, 'index']);
     Route::get('/forex/{currency_pair}', [ForexController::class, 'show']);
 });
-
