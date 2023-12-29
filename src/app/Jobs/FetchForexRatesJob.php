@@ -9,31 +9,26 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class FetchForexRatesJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private ForexService $forexService;
+    public int $tries = 3;
 
-    private ForexCurrency $forexCurrency;
-
-    /**
-     * Create a new job instance.
-     */
-    public function __construct(ForexCurrency $forexCurrency, ForexService $forexService)
-    {
-        //
-        $this->forexService = $forexService;
-        $this->forexCurrency = $forexCurrency;
-    }
+    public int $timeout = 120;
 
     /**
      * Execute the job.
      */
-    public function handle(): void
+    public function handle(ForexService $forexService, ForexCurrency $forexCurrency): void
     {
-        $status[] = $this->forexService->saveForexRate($this->forexCurrency);
-
+        try {
+            $forexService->saveForexRate($forexCurrency);
+        } catch (\Exception $e) {
+            Log::error('Failed to fetch forex rate: '.$e->getMessage());
+            $this->release(10); // Release the job back onto the queue with a delay of 60 seconds
+        }
     }
 }

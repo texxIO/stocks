@@ -8,7 +8,6 @@ use App\Repositories\ForexRepository;
 use Exception;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
 
 class ForexService
 {
@@ -27,6 +26,9 @@ class ForexService
         $this->forexRateRepository = $forexRateRepository;
     }
 
+    /**
+     * @throws Exception
+     */
     public function saveForexRate(ForexCurrency $forexCurrency)
     {
         $api_key = config('services.alpha_vantage.api_key');
@@ -37,9 +39,9 @@ class ForexService
             return $cached_quote;
         }
 
-        try {
+        $response = Http::get(self::API_URL.'?function='.self::API_FUNCTION."&from_currency={$forexCurrency->from_currency}&to_currency={$forexCurrency->to_currency}&apikey={$api_key}");
 
-            $response = Http::get(self::API_URL.'?function='.self::API_FUNCTION."&from_currency={$forexCurrency->from_currency}&to_currency={$forexCurrency->to_currency}&apikey={$api_key}");
+        if ($response->successful()) {
             $data = json_decode($response->Body(), true);
 
             if (! empty($data['Error Message'])) {
@@ -55,11 +57,8 @@ class ForexService
             $this->forexRateRepository->save($rateObject->toArray(), $forexCurrency);
 
             return true;
-
-        } catch (Exception $e) {
-            Log::error($e->getMessage());
-
-            return null;
+        } else {
+            throw new Exception('Failed to fetch forex rate: '.$response->body());
         }
     }
 }

@@ -4,7 +4,6 @@ namespace App\Console\Commands;
 
 use App\Jobs\FetchForexRatesJob;
 use App\Models\ForexCurrency;
-use App\Services\ForexService;
 use Illuminate\Console\Command;
 
 class FetchForexRateCommand extends Command
@@ -23,14 +22,6 @@ class FetchForexRateCommand extends Command
      */
     protected $description = 'Fetch forex quotes from Alpha Vantage API';
 
-    private ForexService $forexService;
-
-    public function __construct(ForexService $forexService)
-    {
-        parent::__construct();
-        $this->forexService = $forexService;
-    }
-
     /**
      * Execute the console command.
      */
@@ -40,7 +31,7 @@ class FetchForexRateCommand extends Command
 
         foreach ($currency_pairs as $currency_pair) {
 
-            FetchForexRatesJob::dispatch($currency_pair, $this->forexService);
+            FetchForexRatesJob::dispatch($currency_pair);
         }
         $this->info('Successfully dispatched the fetch currency rates jobs.');
     }

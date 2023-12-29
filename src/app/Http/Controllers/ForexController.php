@@ -16,7 +16,6 @@ class ForexController extends Controller
 
     public function index()
     {
-
         $currencies = $this->forexRepository->getCurrency();
 
         return response()->json($currencies);
