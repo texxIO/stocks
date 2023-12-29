@@ -41,6 +41,10 @@ artisan-queue-work:
 	$(DOCKER_COMPOSE) exec -u $(shell id -u):$(shell id -g) php php artisan queue:work
 .PHONY: artisan-queue-work
 
+artisan-horizon:
+	$(DOCKER_COMPOSE) exec -u $(shell id -u):$(shell id -g) php php artisan horizon
+.PHONY: artisan-horizon
+
 npm-install:
 	$(DOCKER_COMPOSE) exec -u $(shell id -u):$(shell id -g) php npm install
 .PHONY: npm-install

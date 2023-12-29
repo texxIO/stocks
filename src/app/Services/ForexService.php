@@ -5,8 +5,10 @@ namespace App\Services;
 use App\DTO\ForexApiResponseDTO;
 use App\Models\ForexCurrency;
 use App\Repositories\ForexRepository;
+use Exception;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class ForexService
 {
@@ -25,13 +27,14 @@ class ForexService
     {
         $api_key = config('services.alpha_vantage.api_key');
 
-        $cached_quote = Cache::get(self::CACHE_PREFIX . $forexCurrency);
+        $cached_quote = Cache::get(self::CACHE_PREFIX . $forexCurrency->currency_pair);
 
         if ($cached_quote) {
             return $cached_quote;
         }
 
         try {
+
             $response = Http::get(self::API_URL . "?function=" . self::API_FUNCTION . "&from_currency={$forexCurrency->from_currency}&to_currency={$forexCurrency->to_currency}&apikey={$api_key}");
             $data = json_decode($response->Body(), true);
 
@@ -40,13 +43,18 @@ class ForexService
                 return [];
             }
 
-            Cache::add(self::CACHE_PREFIX . $forexCurrency, $data['Realtime Currency Exchange Rate'], self::CACHE_TTL);
+            Cache::add(
+                self::CACHE_PREFIX . $forexCurrency->currency_pair, $data['Realtime Currency Exchange Rate'],
+                self::CACHE_TTL
+            );
             $rateObject = new ForexApiResponseDTO($data['Realtime Currency Exchange Rate']);
+
             $this->forexRateRepository->save($rateObject->toArray(), $forexCurrency);
-            return json_decode($response->getBody(), true);
 
-        } catch (\Exception $e) {
+            return true;
 
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
             return null;
         }
     }

@@ -6,7 +6,7 @@ use App\Models\Stock;
 use App\Services\StockService;
 use Illuminate\Console\Command;
 
-class FetchStockQuotes extends Command
+class FetchStockQuotesCommand extends Command
 {
     /**
      * The name and signature of the console command.

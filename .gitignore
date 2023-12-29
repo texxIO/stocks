@@ -4,7 +4,7 @@
 /src/public/hot
 /src/public/storage
 /src/storage/*.key
-/src/vendor
+/src/vendor/
 
 .env.backup
 .env.production
@@ -18,3 +18,4 @@ yarn-error.log
 /.idea
 /.vscode
 .idea/
+/src/public/vendor/

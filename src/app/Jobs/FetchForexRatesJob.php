@@ -12,19 +12,21 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
 
-class FetchForexRates implements ShouldQueue
+class FetchForexRatesJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     private ForexService $forexService;
+    private ForexCurrency $forexCurrency;
 
     /**
      * Create a new job instance.
      */
-    public function __construct(ForexService $forexService)
+    public function __construct(ForexCurrency $forexCurrency, ForexService $forexService)
     {
         //
         $this->forexService = $forexService;
+        $this->forexCurrency = $forexCurrency;
     }
 
     /**
@@ -32,10 +34,7 @@ class FetchForexRates implements ShouldQueue
      */
     public function handle(): void
     {
-        $currency_pairs = ForexCurrency::all();
-        $status = [];
-        foreach ($currency_pairs as $currency_pair) {
-            $status[] = $this->forexService->saveForexRate($currency_pair);
-        }
+        $status[] = $this->forexService->saveForexRate($this->forexCurrency);
+
     }
 }

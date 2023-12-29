@@ -12,7 +12,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('stocks:fetch-forex-quote EUR/USD')->everyMinute();
+        $schedule->command('stocks:fetch-forex-quote')->everyMinute();
     }
 
     /**

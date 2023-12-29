@@ -2,11 +2,12 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\FetchForexRatesJob;
 use App\Models\ForexCurrency;
 use App\Services\ForexService;
 use Illuminate\Console\Command;
 
-class FetchForexRate extends Command
+class FetchForexRateCommand extends Command
 {
     /**
      * The name and signature of the console command.
@@ -35,18 +36,12 @@ class FetchForexRate extends Command
      */
     public function handle()
     {
-
         $currency_pairs = ForexCurrency::all();
-        $status = [];
+
         foreach ($currency_pairs as $currency_pair) {
-            $status[] = $this->forexService->saveForexRate($currency_pair);
-        }
 
-
-        if (empty($status)) {
-            $this->info("Successfully fetched forex quotes.");
-        } else {
-            $this->error("Failed to fetch stock quote for.");
+            FetchForexRatesJob::dispatch($currency_pair, $this->forexService);
         }
+        $this->info("Successfully dispatched the fetch currency rates jobs.");
     }
 }
